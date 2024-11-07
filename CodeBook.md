@@ -63,15 +63,6 @@ The dataset includes columns such as:
 - The final tidy dataset contains 68 variables (including `subjectId` and `activityType`) and 180 observations (for 30 subjects performing 6 activities).
 - The dataset is sorted by `subjectId` and `activityId`.
 
-### Example of Final Dataset:
-
-| subjectId | activityType     | tBodyAcc-mean-X | tBodyAcc-mean-Y | tBodyAcc-mean-Z | ... |
-|-----------|------------------|-----------------|-----------------|-----------------|-----|
-| 1         | WALKING          | 0.25717778      | -0.02328523     | -0.09341125     | ... |
-| 1         | WALKING_UPSTAIRS | 0.28602671      | -0.01316336     | -0.11908252     | ... |
-| 2         | WALKING          | 0.25546103      | -0.02327764     | -0.09146789     | ... |
-| ...       | ...              | ...             | ...             | ...             | ... |
-
 ## Summary
 
 The `run_analysis.R` script prepares a clean and tidy dataset that can be used for further analysis. The main tasks include merging the training and test datasets, extracting relevant features, labeling activities, applying descriptive variable names, and creating a second tidy dataset with the average of each variable for each activity and subject.
