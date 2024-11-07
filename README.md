@@ -1,46 +1,52 @@
-# Getting-and-Cleaning-Data-Peer-graded-Assignment
-##Getting and Cleaning Data - peer assessment project
+# Getting and Cleaning Data - Peer Assessment Project
 
-The purpose of this project is to demonstrate your ability to collect, work with, and clean a data set. The goal is to prepare tidy data that can be used for later analysis. You will be graded by your peers on a series of yes/no questions related to the project. You will be required to submit: 1) a tidy data set as described below, 2) a link to a Github repository with your script for performing the analysis, and 3) a code book that describes the variables, the data, and any transformations or work that you performed to clean up the data called CodeBook.md. You should also include a README.md in the repo with your scripts. This repo explains how all of the scripts work and how they are connected.
+## Description
 
-One of the most exciting areas in all of data science right now is wearable computing - see for example this article . Companies like Fitbit, Nike, and Jawbone Up are racing to develop the most advanced algorithms to attract new users. The data linked to from the course website represent data collected from the accelerometers from the Samsung Galaxy S smartphone. A full description is available at the site where the data was obtained:
+This project demonstrates how to clean and tidy data using R. The goal was to merge and clean datasets from a wearable computing study, preparing them for further analysis. The following transformations were performed in line with the course requirements:
 
-http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones
+1. **Merging the training and the test sets**: The training and test datasets were merged to create a single combined dataset.
+2. **Extracting measurements on the mean and standard deviation**: The dataset was filtered to only include the measurements related to the mean and standard deviation for each variable.
+3. **Using descriptive activity names**: The activity labels were applied to the dataset to replace numerical activity identifiers with descriptive names.
+4. **Labeling the dataset with descriptive variable names**: Descriptive column names were applied to the dataset for clarity and better readability.
+5. **Creating a second, independent tidy dataset**: A new tidy dataset was created that contains the average of each variable for each activity and each subject.
 
-Here are the data for the project:
+## R Script (`run_analysis.R`)
 
-https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip
+The R script `run_analysis.R` performs the steps outlined above to process and clean the data.
 
+### Variables
 
-You should create one R script called run_analysis.R that does the following.
+- **`x_train`, `y_train`, `x_test`, `y_test`, `subject_train`, `subject_test`**: These variables contain data from the downloaded files (`X_train.txt`, `Y_train.txt`, `subject_train.txt`, etc.). They represent the feature values, activity labels, and subject identifiers for both training and test sets.
+- **`x_data`, `y_data`, `subject_data`**: These variables merge the corresponding datasets (`x_train`, `x_test`, `y_train`, `y_test`, `subject_train`, and `subject_test`) for further analysis.
+- **`features`**: Contains the correct names for the columns in the `x_data` dataset, which are then applied to the column names of the dataset.
 
-1. Merges the training and the test sets to create one data set.
-2. Extracts only the measurements on the mean and standard deviation for each measurement.
-3. Uses descriptive activity names to name the activities in the data set
-4. Appropriately labels the data set with descriptive variable names.
-5. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
+### Detailed Steps in the Script:
 
-#In the run_analysis.R script,  were recreated  each step.
+1. **Loading the Data**: The script begins by reading the raw data files from the downloaded zip file.
+2. **Assigning Column Names**: Descriptive column names from `features.txt` are applied to the `x_train` and `x_test` datasets.
+3. **Merging Data**: The `train` and `test` sets are combined using `cbind` and `rbind` to create one complete dataset (`setAllInOne`).
+4. **Extracting Relevant Columns**: Only columns containing the mean and standard deviation are retained using regular expressions.
+5. **Labeling Activities**: Activity labels are merged into the dataset to replace numeric activity IDs with descriptive names.
+6. **Creating Tidy Data**: A second dataset is created that contains the average of each variable for each subject and each activity, which is saved as `secTidySet.txt`.
 
-This file 'run_analysis.R' contains all the code to perform the analyses described in the 5 steps. They can be launched in RStudio by just importing the file.
+## Output
 
-## About this R script
-File with R code "run_analysis.R" perform 5 following steps (in accordance assigned task of course work):   
-1. Merging the training and the test sets to create one data set.   
-  1.1 Reading files    
-    1.1.1 Reading trainings tables   
-    1.1.2 Reading testing tables   
-    1.1.3 Reading feature vector   
-    1.1.4 Reading activity labels   
-  1.2 Assigning column names   
-  1.3 Merging all data in one set   
-2. Extracting only the measurements on the mean and standard deviation for each measurement   
-  2.1 Reading column names  
-  2.2 Create vector for defining ID, mean and standard deviation   
-  2.3 Making nessesary subset from setAllInOne   
-3. Using descriptive activity names to name the activities in the data set   
-4. Appropriately labeling the data set with descriptive variable names   
-5. Creating a second, independent tidy data set with the average of each variable for each activity and each subject   
-  5.1 Making second tidy data set   
-  5.2 Writing second tidy data set in txt file   
+- **`secTidySet.txt`**: This file contains the final tidy dataset, which includes the average of each measurement for each activity and each subject.
+  
+## Codebook
 
+The **CodeBook.md** contains a detailed description of the variables, transformations, and data cleaning procedures used in this project. It also provides a summary of the data after it has been cleaned and tidied.
+
+## Instructions to Run the Script
+
+1. Download the zip file containing the dataset using the script.
+2. Unzip the file in the `./data` directory.
+3. Run the `run_analysis.R` script to clean and process the data.
+4. The final output will be saved as `secTidySet.txt` in the working directory.
+
+## Required Libraries
+
+- **dplyr**: The script uses the `dplyr` library for data manipulation. Make sure to install it if it's not already installed:
+  
+  ```r
+  install.packages("dplyr")
